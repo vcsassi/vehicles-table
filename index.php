@@ -23,8 +23,8 @@
 		} 
 
 
-		$theSnazzySql =  "SELECT * FROM vehicle
-				  LEFT OUTER JOIN makers 
+		$theSnazzySql =  "SELECT vehicle.*, makers.name FROM vehicle
+				  LEFT OUTER JOIN makers
 				  ON makers.id = vehicle.make_id";
 
 		$result = $conn->query($theSnazzySql);
@@ -32,7 +32,7 @@
 		if($result->num_rows > 0){
 			while($row = $result->fetch_assoc()){
 				echo "<div>";
-				echo " Make: ". $row["make_id"];
+				echo " Make: ". $row["name"];
 				echo " Model: ".$row["type"];
 				echo " Engine: ".$row["engine"];
 				echo " Year: ".$row["year"];
