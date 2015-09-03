@@ -1,0 +1,62 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800|Roboto+Slab:400,100,300,700);
+
+/**  Basic Page CSS **/
+
+/*colors: 
+dark: verde militar#2F3837, verde seco#4C493E, morado oscuro#222028
+light: gris#C5C7B6, crema#FFF8D3*/
+
+
+
+body{
+  font-size: 1.6em;
+  position: relative;
+  background: #C5C7B6;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+  margin-top: 0;
+}
+h2 {
+	color: #222028;
+	margin: 0.5em;
+}
+.entrada {
+	padding: 0.2em;
+}
+
+.btn-lg{
+	float: center;
+	border-radius: 0;
+	background-color: #82787B;
+	color: #FFF8D3;
+	width: 100%;
+}
+td{
+	background-color: #FFF8D3;
+}
+
+input:hover {
+	background-color: #FFF8D3;
+	box-shadow: none;
+}
+input:active {
+	background-color: white;
+	border: 1px solid #2F3837;
+	box-shadow: none;
+	outline: none;
+}
+input:focus{
+	border: 1px solid #2F3837;
+	outline: none;
+}
+table{
+	padding-left: 0;
+	padding-right: 0;
+}
+.col {
+	padding: 0;
+	margin: 0;
+}
