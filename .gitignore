@@ -1,1 +1,5 @@
 /dbconnection.inc.php
+*.DS_Store
+/dvconnect.inc.php
+/error_log
+*.php alias
