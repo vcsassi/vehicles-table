@@ -58,6 +58,7 @@ $result_makers = $conn->query($sql_makers);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Vehicle Tables Assigment</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
   </head>
   <body>
     <div class="content container">
@@ -127,37 +128,37 @@ $result_makers = $conn->query($sql_makers);
           <div class="input-form">
             <form action="" method="post">
 
-              <div class="col-md-6">
+              <div class="col-md-6 entrada">
                 <label class="col-md-12" for="newCarType"> Type:
                     <input class="col-md-12" type="text" name="car_type" id="newCarType" />
                 </label>
               </div>
          
 
-              <div class="col-md-6">
+              <div class="col-md-6 entrada">
                 <label class="col-md-12" for="newCarEngine"> Engine:
                   <input class="col-md-12" type="text" name="car_engine" id="newCarEngine" />
                 </label>
               </div>
 
-              <div class="col-md-6">
+              <div class="col-md-6 entrada">
                 <label class="col-md-12" for="newCarYear"> Year:
                   <input class="col-md-12" type="text" name="car_year" id="newCarYear" />
                 </label>
               </div>
 
-              <div class="col-md-6">
+              <div class="col-md-6 entrada">
                 <label class="col-md-12" for="newCarFuel"> Fuel:
                   <input class="col-md-12" type="text" name="car_fuel" id="newCarFuel" />
                 </label>
               </div>
 
-              <div class="col-md-6">
+              <div class="col-md-6 entrada">
                 <label class="col-md-12" for="newCarModel"> Model:
                   <input class="col-md-12" type="text" name="car_model" id="newCarModel" />
                 </label>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-6 entrada">
                 <label class="col-md-12" for="newCarMake"> Make:
                   <select name="car_make">
                     <?php
@@ -170,7 +171,7 @@ $result_makers = $conn->query($sql_makers);
                   </select>
               </div>
 
-              <div class="col-md-6">
+              <div class="col-md-12 entrada">
                 </label>
                 <button class="btn btn-lg" type="submit">Insert new car</button>
               </div>
