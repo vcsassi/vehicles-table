@@ -68,35 +68,33 @@ $result_makers = $conn->query($sql_makers);
       <div class="table responsive">
         <table class="table table-striped">
           <tr>
-            <td><?php echo "<table class='vehicle'>\n"; ?></td>
-            <td><?php echo "<tr class='header-row'>\n"; ?></td>
-            <td><?php echo "\t<td>Type</td>\n"; ?></td>
-            <td><?php echo "\t<td>Engine</td>\n"; ?></td>
-            <td><?php echo "\t\t<td>Year</td>\n"; ?></td>
-            <td><?php echo "\t\t<td>Fuel</td>\n"; ?></td>
-            <td><?php echo "\t\t<td>Model</td>\n"; ?></td>
-            <td><?php echo "\t\t<td>Delete</td>\n"; ?></td>
-            <td><?php echo "</tr>\n"; ?></td>
+            
+            <td>Type</td>
+            <td>Engine</td>
+            <td>Year</td>
+            <td>Fuel</td>
+            <td>Model</td>
+            <td>Delete</td>
           </tr>
-        </table>
+
 
        <?php 
         if($result->num_rows > 0){
-          while($row = $result->fetch_assoc()){
+          while($row = $result->fetch_assoc()){ // start loop
 
        ?>
 
        <tr>
-            <td><?php echo "<tr class='data-row $row_class'>"; ?></td>
-            <td><?php echo "<td>" . $row["type"] . "</td>"; ?></td>
-            <td><?php echo "<td>" . $row["engine"] . "</td>"; ?></td>
-            <td><?php echo "<td>" . $row["year"] . "</td>"; ?></td>
-            <td><?php echo "<td>" . $row["fuel"] . "</td>"; ?></td>
-            <td><?php echo "<td>" . $row["model"] . "</td>"; ?></td>
-            <td><?php echo "<td>" . $row["name"] . "</td>"; ?></td>
+           
+            <td><?php echo $row["type"]; ?></td>
+            <td><?php echo $row["engine"]; ?></td>
+            <td><?php echo $row["year"]; ?></td>
+            <td><?php echo $row["fuel"]; ?></td>
+            <td><?php echo $row["model"]; ?></td>
+            <td><?php echo $row["name"]; ?></td>
              <!-- <a href="mypage.php?delete_id=2">Delete</a> -->
-            <td><?php echo "<td><a href=". $_SERVER["PHP_SELF"]. "?delete_id=".$row['id']."> delete</a></td>"; ?></td>
-            <td><?php echo "</tr>"; ?></td>
+            <td><a href="<?php echo  $_SERVER["PHP_SELF"];?> "?delete_id="<?php echo $row['id']?>"> delete</a></td>
+          
             
           </tr>
 
@@ -119,12 +117,12 @@ $result_makers = $conn->query($sql_makers);
 
         
         ?>
-
+        </table>
        </div> 
     
 
       <h2>Insert Records</h2>
-        <div class="content-fluid">
+        <div class="content">
           <div class="input-form">
             <form action="" method="post">
 
