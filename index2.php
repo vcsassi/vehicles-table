@@ -1,7 +1,7 @@
 <?php
 require('dvconnect.inc.php');
 $title = "car table";
-include("header.inc.php");
+// include("header.inc.php");
 $row_class = "odd";
 // Create connection
 $conn = new mysqli($host, $db_user, $db_password, $dbname);
@@ -20,7 +20,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   $fuel = $_POST["car_fuel"];
   $model = $_POST["car_model"];
   $make_id = $_POST["car_make"];
-  //don't forget to quote your inserted variables :-(
   $sql_insert = "INSERT INTO vehicle (id, type, engine, year, fuel, model, make_id) VALUES (NULL, '$type' , '$engine', '$year', '$fuel', '$model', '$make_id')";
 
   if ($conn->query($sql_insert) === TRUE) {
@@ -51,12 +50,6 @@ $result_makers = $conn->query($sql_makers);
 
 ?>
 
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -68,24 +61,22 @@ $result_makers = $conn->query($sql_makers);
   </head>
   <body>
     <div class="content container">
-      <h1>Table</h1>
+      <h2>Table / Delete Records</h2>
+
+
       <div class="table responsive">
         <table class="table table-striped">
-
-              
           <tr>
             <td><?php echo "<table class='vehicle'>\n"; ?></td>
             <td><?php echo "<tr class='header-row'>\n"; ?></td>
-            <td><?php echo "\t<th>Type</th>\n"; ?></td>
-            <td><?php echo "\t<th>Engine</th>\n"; ?></td>
-            <td><?php echo "\t\t<th>Year</th>\n"; ?></td>
-            <td><?php echo "\t\t<th>Fuel</th>\n"; ?></td>
-            <td><?php echo "\t\t<th>Model</th>\n"; ?></td>
-            <td><?php echo "\t\t<th>Delete</th>\n"; ?></td>
+            <td><?php echo "\t<td>Type</td>\n"; ?></td>
+            <td><?php echo "\t<td>Engine</td>\n"; ?></td>
+            <td><?php echo "\t\t<td>Year</td>\n"; ?></td>
+            <td><?php echo "\t\t<td>Fuel</td>\n"; ?></td>
+            <td><?php echo "\t\t<td>Model</td>\n"; ?></td>
+            <td><?php echo "\t\t<td>Delete</td>\n"; ?></td>
             <td><?php echo "</tr>\n"; ?></td>
           </tr>
-
-
         </table>
 
        <?php 
@@ -101,12 +92,15 @@ $result_makers = $conn->query($sql_makers);
             <td><?php echo "<td>" . $row["year"] . "</td>"; ?></td>
             <td><?php echo "<td>" . $row["fuel"] . "</td>"; ?></td>
             <td><?php echo "<td>" . $row["model"] . "</td>"; ?></td>
+            <td><?php echo "<td>" . $row["name"] . "</td>"; ?></td>
              <!-- <a href="mypage.php?delete_id=2">Delete</a> -->
             <td><?php echo "<td><a href=". $_SERVER["PHP_SELF"]. "?delete_id=".$row['id']."> delete</a></td>"; ?></td>
             <td><?php echo "</tr>"; ?></td>
             
           </tr>
 
+
+        
           <?php
             if($row_class == "odd"){
               $row_class = "even";
@@ -119,43 +113,68 @@ $result_makers = $conn->query($sql_makers);
         }
         echo "</table>";
 
+
         $conn->close();
 
         
         ?>
+
        </div> 
     
 
-      <h1>Insert/Delete Records</h1>
-        <div class="input-form">
-          <form action="" method="post">
-            <label for="newCarType"> Type:
-              <input type="text" name="car_type" id="newCarType" />
-            </label>
-            <label for="newCarEngine"> Engine:
-              <input type="text" name="car_engine" id="newCarEngine" />
-            </label>
-            <label for="newCarYear"> Year:
-              <input type="text" name="car_year" id="newCarYear" />
-            </label>
-            <label for="newCarFuel"> Fuel:
-              <input type="text" name="car_fuel" id="newCarFuel" />
-            </label>
-            <label for="newCarModel"> Model:
-              <input type="text" name="car_model" id="newCarModel" />
-            </label>
-            <label for="newCarMake"> Make:
-              <select name="car_make">
-                <?php
-                  if($result_makers->num_rows > 0){
-                    while($maker_row = $result_makers->fetch_assoc()){
-                      echo "<option value='".$maker_row["id"]."'>".$maker_row["name"]."</option>";
-                    }
-                  }
-                ?>
-              </select>
-            </label>
-            <button type="submit">Insert new car</button>
+      <h2>Insert Records</h2>
+        <div class="content-fluid">
+          <div class="input-form">
+            <form action="" method="post">
+
+              <div class="col-md-6">
+                <label class="col-md-12" for="newCarType"> Type:
+                    <input class="col-md-12" type="text" name="car_type" id="newCarType" />
+                </label>
+              </div>
+         
+
+              <div class="col-md-6">
+                <label class="col-md-12" for="newCarEngine"> Engine:
+                  <input class="col-md-12" type="text" name="car_engine" id="newCarEngine" />
+                </label>
+              </div>
+
+              <div class="col-md-6">
+                <label class="col-md-12" for="newCarYear"> Year:
+                  <input class="col-md-12" type="text" name="car_year" id="newCarYear" />
+                </label>
+              </div>
+
+              <div class="col-md-6">
+                <label class="col-md-12" for="newCarFuel"> Fuel:
+                  <input class="col-md-12" type="text" name="car_fuel" id="newCarFuel" />
+                </label>
+              </div>
+
+              <div class="col-md-6">
+                <label class="col-md-12" for="newCarModel"> Model:
+                  <input class="col-md-12" type="text" name="car_model" id="newCarModel" />
+                </label>
+              </div>
+              <div class="col-md-6">
+                <label class="col-md-12" for="newCarMake"> Make:
+                  <select name="car_make">
+                    <?php
+                      if($result_makers->num_rows > 0){
+                        while($maker_row = $result_makers->fetch_assoc()){
+                          echo "<option value='".$maker_row["id"]."'>".$maker_row["name"]."</option>";
+                        }
+                      }
+                    ?>
+                  </select>
+              </div>
+
+              <div class="col-md-6">
+                </label>
+                <button class="btn btn-lg" type="submit">Insert new car</button>
+              </div>
+            </div>
 
           </form>
         </div>
