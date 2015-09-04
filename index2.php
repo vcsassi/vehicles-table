@@ -1,4 +1,5 @@
 <?php
+
 require('dvconnect.inc.php');
 $title = "car table";
 // include("header.inc.php");
@@ -11,17 +12,16 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 // inserting new record
-if($_SERVER["REQUEST_METHOD"] == "POST"){
+if($_SERVER["REQUEST_METHOD"] == "POST" && empty($_POST["update_flag"])){
 
+  $type = filter_var($_POST["car_type"], FILTER_SANITIZE_STRING);
+  $engine = filter_var($_POST["car_engine"], FILTER_SANITIZE_STRING);
+  $year = filter_var($_POST["car_year"], FILTER_SANITIZE_STRING);
+  $fuel = filter_var($_POST["car_fuel"], FILTER_SANITIZE_STRING);
+  $model = filter_var($_POST["car_model"], FILTER_SANITIZE_STRING);
+  $make_id = filter_var($_POST["car_make"], FILTER_SANITIZE_NUMBER_INT);
 
-  $type = $_POST["car_type"];
-  $engine = $_POST["car_engine"];
-  $year = $_POST["car_year"];
-  $fuel = $_POST["car_fuel"];
-  $model = $_POST["car_model"];
-  $make_id = $_POST["car_make"];
   $sql_insert = "INSERT INTO vehicle (id, type, engine, year, fuel, model, make_id) VALUES (NULL, '$type' , '$engine', '$year', '$fuel', '$model', '$make_id')";
-
   if ($conn->query($sql_insert) === TRUE) {
         echo "New record created successfully";
     } else {
@@ -39,6 +39,32 @@ if($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["delete_id"])){
         echo "Error on delete:" . $sql_delete . "<br>" .$conn->error;
     }
 }
+
+// Updating a record
+if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["update_flag"])){ 
+  $type_update = filter_var($POST["car_type"], FILTER_SANITIZE_STRING);
+  $engine_update = filter_var($_POST["car_engine"], FILTER_SANITIZE_STRING);
+  $year_update = filter_var($_POST["car_year"], FILTER_SANITIZE_NUMBER_INT);
+  $fuel_update = filter_var($_POST["car_fuel"], FILTER_SANITIZE_STRING);
+  $model_update = filter_var($_POST["car_model"], FILTER_SANITIZE_STRING);
+  $make_id_update = filter_var($_POST["car_make"], FILTER_SANITIZE_NUMBER_INT);
+  $id_update = $_POST["update_flag"];
+  $sql_update = "UPDATE vehicle SET model = '$model_update',
+                type = '$type_update',
+                engine = '$engine_update',
+                year = 'year_update',
+                fuel = 'fuel_update',
+                model = 'model_update',
+                make_id = '$make_id_update' WHERE id = $id_update";
+  if ($conn->query($sql_update) === TRUE) {
+    echo "Record updated successfully";
+  } else {
+    echo "Error: " . $sql_update . "<br>" . $conn->error;
+  }
+}
+
+
+
 
 // reading current cars
 $sql = "SELECT vehicle.id, vehicle.type, vehicle.engine, vehicle.year, vehicle.fuel, vehicle.model, makers.name FROM vehicle LEFT OUTER JOIN makers ON makers.id = vehicle.make_id";
